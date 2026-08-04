@@ -249,70 +249,7 @@
 })();
 
 
-/* ══ FORM VALIDATION & HONEYPOT ════════════════════════ */
-(function initFormValidation() {
-  const form    = document.getElementById('booking-form');
-  const nameEl  = document.getElementById('f-name');
-  const contEl  = document.getElementById('f-contact');
-  const privEl  = document.getElementById('f-privacy');
-  const hpEl    = document.getElementById('hp-website');
-  const submit  = document.getElementById('submit-btn');
 
-  if (!form) return;
-
-  const errName = document.getElementById('err-name');
-  const errCont = document.getElementById('err-contact');
-  const errPriv = document.getElementById('err-privacy');
-
-  form.addEventListener('submit', e => {
-    // Spam Honeypot Check
-    if (hpEl && hpEl.value.trim() !== '') {
-      e.preventDefault();
-      return;
-    }
-
-    let isValid = true;
-
-    // Validate Name
-    if (!nameEl || !nameEl.value.trim()) {
-      if (errName) errName.textContent = 'Bitte geben Sie Ihren Namen ein.';
-      if (nameEl) nameEl.setAttribute('aria-invalid', 'true');
-      isValid = false;
-    } else {
-      if (errName) errName.textContent = '';
-      if (nameEl) nameEl.removeAttribute('aria-invalid');
-    }
-
-    // Validate Contact
-    if (!contEl || !contEl.value.trim()) {
-      if (errCont) errCont.textContent = 'Bitte E-Mail oder Telefonnummer angeben.';
-      if (contEl) contEl.setAttribute('aria-invalid', 'true');
-      isValid = false;
-    } else {
-      if (errCont) errCont.textContent = '';
-      if (contEl) contEl.removeAttribute('aria-invalid');
-    }
-
-    // Validate Privacy Checkbox
-    if (privEl && !privEl.checked) {
-      if (errPriv) errPriv.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
-      isValid = false;
-    } else {
-      if (errPriv) errPriv.textContent = '';
-    }
-
-    if (!isValid) {
-      e.preventDefault();
-      return;
-    }
-
-    if (submit) {
-      submit.disabled = true;
-      const t = submit.querySelector('.btn-text');
-      if (t) t.textContent = 'Wird gesendet...';
-    }
-  });
-})();
 
 /* ══ FOOTER YEAR ═══════════════════════════════════════ */
 (function initYear() {
