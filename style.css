@@ -7,22 +7,23 @@
    ═══════════════════════════════════════════════════════ */
 
 :root {
-  --bg:           #ECE7E2;
-  --bg-subtle:    #E4DFD8;
-  --surface:      #F5F2EE;
-  --surface-hover:#FAF8F5;
+  --bg:           #FAF7F3;
+  --bg-subtle:    #F2ECE3;
+  --surface:      #FFFFFF;
+  --surface-hover:#FDFBF8;
+  --surface-trans:rgba(255, 255, 255, 0.88);
 
-  --border:       rgba(195, 185, 175, 0.6);
-  --border-strong:#C6BBB0;
-  --border-focus: #6B4234;
+  --border:       rgba(212, 198, 183, 0.55);
+  --border-strong:rgba(182, 164, 146, 0.75);
+  --border-focus: #663F2C;
 
-  --text-head:    #1F1A17;
-  --text-body:    #4A433E;
-  --text-muted:   #827870;
+  --text-head:    #1A1412;
+  --text-body:    #4A4038;
+  --text-muted:   #887B70;
 
-  --accent:       #6B4234;
-  --accent-hover: #543226;
-  --accent-soft:  rgba(107, 66, 52, 0.12);
+  --accent:       #663F2C;
+  --accent-hover: #4E2E1F;
+  --accent-soft:  rgba(102, 63, 44, 0.08);
 
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -31,7 +32,8 @@
   --r-full: 9999px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --shadow:   0 8px 28px rgba(31, 26, 23, 0.07);
+  --shadow:   0 14px 40px rgba(26, 20, 18, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-lg:0 22px 55px rgba(26, 20, 18, 0.1);
 }
 
 /* ── RESET & CROSS-BROWSER BASE ─────────────────────── */
@@ -93,10 +95,10 @@ img { display: block; max-width: 100%; height: auto; }
   height: 76px;
   display: flex;
   align-items: center;
-  background: #ECE7E2; /* Fallback for Firefox */
-  background: rgba(236, 231, 226, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #FAF7F3; /* Fallback for Firefox */
+  background: rgba(250, 247, 243, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
 }
 
@@ -686,7 +688,7 @@ h2 em { font-style: italic; color: var(--accent); }
    FOOTER
 ═══════════════════════════════════════════════════════ */
 .footer {
-  background: #DFD9D2;
+  background: #EFE7DE;
   border-top: 1px solid var(--border);
   padding-block: 2rem 1.75rem;
 }
@@ -979,9 +981,9 @@ body.js-enabled .team-media-wrap.visible .team-img {
 .horizontal-nav-bar {
   height: 60px;
   width: 100%;
-  background: rgba(236, 231, 226, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 247, 243, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
   padding: 0 2rem;
   display: flex;
