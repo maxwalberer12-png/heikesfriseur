@@ -15,6 +15,9 @@
   <meta property="og:description" content="Ihr persönlicher Friseursalon in Bärnau." />
   <meta property="og:locale" content="de_DE" />
 
+  <!-- Preload Critical Hero Image for LCP Optimization -->
+  <link rel="preload" href="img/salon_hero.png" as="image" type="image/png" fetchpriority="high" />
+
   <!-- Fonts: Google Fonts Fallback for Firefox MIME-type compatibility -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -232,8 +235,10 @@
 
         <div class="hero-editorial-media js-reveal">
           <div class="media-frame group">
-            <img src="img/salon_hero.png" alt="Friseursalon Interieur Friseurstüberl Heike Fröhlich" width="800"
-              height="900" loading="eager" class="media-img" />
+            <picture>
+              <source media="(max-width: 800px)" srcset="img/salon_hero.png" sizes="(max-width: 800px) 100vw, 800px" />
+              <img src="img/salon_hero.png" srcset="img/salon_hero.png 800w" sizes="(max-width: 800px) 100vw, 800px" alt="Friseursalon Interieur Friseurstüberl Heike Fröhlich" width="800" height="900" loading="eager" fetchpriority="high" decoding="async" class="media-img" />
+            </picture>
             <div class="media-overlay-badge">
               <span class="badge-num">Bärnau</span>
               <span class="badge-lbl">Friseurstüberl Heike Fröhlich</span>
@@ -371,8 +376,8 @@
               <div class="team-cards-grid">
                 <article class="bespoke-team-card group js-reveal">
                   <div class="team-media-wrap">
-                    <img src="img/team_heike.png" alt="Heike Fröhlich – Inhaberin" width="400"
-                      height="500" loading="lazy" class="team-img" />
+                    <img src="img/team_heike.png" srcset="img/team_heike.png 400w" sizes="(max-width: 800px) 100vw, 400px" alt="Heike Fröhlich – Inhaberin" width="400"
+                      height="500" loading="lazy" decoding="async" class="team-img" />
                   </div>
                   <div class="team-meta">
                     <h3>Heike Fröhlich</h3>
