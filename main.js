@@ -52,10 +52,16 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
+          // Read-First: measure target position BEFORE DOM mutations
+          const targetTop = target.getBoundingClientRect().top;
+          const currentScrollY = window.scrollY;
+          const scrollToPos = targetTop + currentScrollY - 72;
+
+          // DOM Write: reveal elements
           target.querySelectorAll('.js-reveal, .js-stagger').forEach(el => el.classList.add('visible'));
+
           setTimeout(() => {
-            const top = target.getBoundingClientRect().top + window.scrollY - 72;
-            window.scrollTo({ top, behavior: 'smooth' });
+            window.scrollTo({ top: scrollToPos, behavior: 'smooth' });
           }, 120);
         }
       }
@@ -64,9 +70,6 @@
 
   document.addEventListener('keydown', e => e.key === 'Escape' && close());
 })();
-
-
-
 
 /* ══ SMOOTH SCROLL ═════════════════════════════════════ */
 (function initSmoothScroll() {
@@ -77,9 +80,16 @@
       const el = document.querySelector(targetId);
       if (!el) return;
       e.preventDefault();
+
+      // Read-First: measure layout before modifying classList
+      const targetTop = el.getBoundingClientRect().top;
+      const currentScrollY = window.scrollY;
+      const scrollToPos = targetTop + currentScrollY - 72;
+
+      // Batch DOM mutations
       el.querySelectorAll('.js-reveal, .js-stagger').forEach(child => child.classList.add('visible'));
-      const top = el.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top, behavior: 'smooth' });
+
+      window.scrollTo({ top: scrollToPos, behavior: 'smooth' });
     });
   });
 })();
@@ -111,20 +121,30 @@
   }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
   const startObserving = () => {
-    // Reveal main block elements
-    document.querySelectorAll('.js-reveal, .media-frame, .team-media-wrap').forEach(el => {
+    const viewportHeight = window.innerHeight;
+
+    // Read-First Phase: gather all bounding rects
+    const revElements = [...document.querySelectorAll('.js-reveal, .media-frame, .team-media-wrap')].map(el => ({
+      el,
+      rect: el.getBoundingClientRect()
+    }));
+
+    const stgElements = [...document.querySelectorAll('.js-stagger')].map(el => ({
+      el,
+      rect: el.getBoundingClientRect()
+    }));
+
+    // Write Phase: observe and set initial visibility
+    revElements.forEach(({ el, rect }) => {
       revObs.observe(el);
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 30 && rect.bottom > 0) {
+      if (rect.top < viewportHeight - 30 && rect.bottom > 0) {
         setTimeout(() => el.classList.add('visible'), 120);
       }
     });
 
-    // Reveal staggered grid cards
-    document.querySelectorAll('.js-stagger').forEach(el => {
+    stgElements.forEach(({ el, rect }) => {
       stgObs.observe(el);
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 30 && rect.bottom > 0) {
+      if (rect.top < viewportHeight - 30 && rect.bottom > 0) {
         setTimeout(() => el.classList.add('visible'), 180);
       }
     });
@@ -174,26 +194,43 @@
 
   const totalPanels = 4;
   let currentPanelIndex = 0;
+  let ticking = false;
 
-  const onScroll = () => {
-    if (window.innerWidth <= 899) {
+  // Cached layout metrics to avoid Layout Thrashing on scroll
+  let cachedViewportWidth = window.innerWidth;
+  let cachedViewportHeight = window.innerHeight;
+  let cachedContainerHeight = container.offsetHeight;
+  let cachedContainerOffsetTop = container.offsetTop;
+  let cachedPanels = [...container.querySelectorAll('.horizontal-panel')];
+
+  const updateMetrics = () => {
+    cachedViewportWidth = window.innerWidth;
+    cachedViewportHeight = window.innerHeight;
+    cachedContainerHeight = container.offsetHeight;
+    cachedContainerOffsetTop = container.offsetTop;
+  };
+
+  const updateScrollState = () => {
+    ticking = false;
+
+    if (cachedViewportWidth <= 899) {
       track.style.transform = 'none';
       return;
     }
 
-    const rect = container.getBoundingClientRect();
+    const rectTop = container.getBoundingClientRect().top;
     const headerHeight = 76;
-    const scrollableDist = container.offsetHeight - window.innerHeight;
+    const scrollableDist = cachedContainerHeight - cachedViewportHeight;
 
     if (scrollableDist <= 0) return;
 
-    // Calculate progress when top of container reaches header (rect.top <= headerHeight)
-    const scrolled = headerHeight - rect.top;
+    // Calculate progress when top of container reaches header
+    const scrolled = headerHeight - rectTop;
     let progress = scrolled / scrollableDist;
     progress = Math.min(1, Math.max(0, progress));
 
     // Move horizontal track
-    const maxTranslate = (totalPanels - 1) * window.innerWidth;
+    const maxTranslate = (totalPanels - 1) * cachedViewportWidth;
     const translateX = progress * maxTranslate;
     track.style.transform = `translateX(-${translateX}px)`;
 
@@ -201,29 +238,41 @@
     const barWidth = 25 + (progress * 75);
     if (bar) bar.style.width = `${barWidth}%`;
 
-    // Update step indicator (01 / 04, 02 / 04, 03 / 04, 04 / 04)
+    // Update step indicator
     currentPanelIndex = Math.min(totalPanels - 1, Math.max(0, Math.round(progress * (totalPanels - 1))));
     if (step) step.textContent = `0${currentPanelIndex + 1} / 0${totalPanels}`;
 
     // Reveal elements inside active horizontal panel
-    const currentPanel = container.querySelectorAll('.horizontal-panel')[currentPanelIndex];
+    const currentPanel = cachedPanels[currentPanelIndex];
     if (currentPanel) {
       currentPanel.querySelectorAll('.js-reveal, .js-stagger').forEach(el => el.classList.add('visible'));
     }
   };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  onScroll();
+  const requestScrollUpdate = () => {
+    if (!ticking) {
+      requestAnimationFrame(updateScrollState);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+  window.addEventListener('resize', () => {
+    updateMetrics();
+    requestScrollUpdate();
+  }, { passive: true });
+
+  updateMetrics();
+  updateScrollState();
 
   // Navigation arrow buttons
   const scrollToPanel = (index) => {
-    if (window.innerWidth <= 899) return;
+    if (cachedViewportWidth <= 899) return;
     const targetIndex = Math.min(totalPanels - 1, Math.max(0, index));
     const headerHeight = 76;
-    const scrollableDist = container.offsetHeight - (window.innerHeight - headerHeight);
+    const scrollableDist = cachedContainerHeight - (cachedViewportHeight - headerHeight);
     const targetProgress = targetIndex / (totalPanels - 1);
-    const targetScrollY = (container.offsetTop - headerHeight) + (targetProgress * scrollableDist);
+    const targetScrollY = (cachedContainerOffsetTop - headerHeight) + (targetProgress * scrollableDist);
 
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
   };
@@ -242,16 +291,13 @@
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const targetId = a.getAttribute('href');
-      if (targetId in navMap && window.innerWidth > 899) {
+      if (targetId in navMap && cachedViewportWidth > 899) {
         e.preventDefault();
         scrollToPanel(navMap[targetId]);
       }
     });
   });
 })();
-
-
-
 
 /* ══ FOOTER YEAR ═══════════════════════════════════════ */
 (function initYear() {
