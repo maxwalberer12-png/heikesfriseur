@@ -1228,10 +1228,20 @@ body.js-enabled .team-media-wrap.visible .team-img {
    RESPONSIVE OPTIMIZATIONS (TABLETS & SMARTPHONES)
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 899px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
   .horizontal-pin-container {
     height: auto !important;
-    background: transparent;
-    border-top: none;
+    background: transparent !important;
+    border-top: none !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
   }
 
   .horizontal-sticky-box {
@@ -1239,23 +1249,35 @@ body.js-enabled .team-media-wrap.visible .team-img {
     top: 0 !important;
     height: auto !important;
     overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .horizontal-scroll-track {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
     transform: none !important;
   }
 
   .horizontal-panel {
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    padding-block: clamp(3rem, 7vh, 5rem) !important;
+    padding-block: clamp(2.5rem, 5vh, 4.5rem) !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border) !important;
     overflow-y: visible !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .horizontal-panel .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .horizontal-nav-bar {
@@ -1278,16 +1300,24 @@ body.js-enabled .team-media-wrap.visible .team-img {
   .media-frame {
     aspect-ratio: 16/11;
     max-height: 320px;
+    width: 100%;
   }
 
   .services-clean-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+    width: 100%;
   }
 
   .team-cards-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    width: 100%;
+  }
+
+  .mobile-drawer.open ~ .mobile-float-call {
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 
@@ -1313,6 +1343,20 @@ body.js-enabled .team-media-wrap.visible .team-img {
 
   .legal-card {
     padding: 1.25rem;
+  }
+
+  .media-overlay-badge {
+    padding: 0.65rem 0.95rem;
+    bottom: 0.85rem;
+    left: 0.85rem;
+  }
+
+  .badge-num {
+    font-size: 1rem;
+  }
+
+  .badge-lbl {
+    font-size: 0.7rem;
   }
 }
 

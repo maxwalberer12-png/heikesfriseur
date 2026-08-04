@@ -52,10 +52,11 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
+          target.querySelectorAll('.js-reveal, .js-stagger').forEach(el => el.classList.add('visible'));
           setTimeout(() => {
             const top = target.getBoundingClientRect().top + window.scrollY - 72;
             window.scrollTo({ top, behavior: 'smooth' });
-          }, 150);
+          }, 120);
         }
       }
     });
@@ -76,6 +77,7 @@
       const el = document.querySelector(targetId);
       if (!el) return;
       e.preventDefault();
+      el.querySelectorAll('.js-reveal, .js-stagger').forEach(child => child.classList.add('visible'));
       const top = el.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -92,7 +94,7 @@
       en.target.classList.add('visible');
       revObs.unobserve(en.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
   const stgObs = new IntersectionObserver(entries => {
     entries.forEach(en => {
@@ -101,12 +103,12 @@
       if (parent) {
         const siblings = [...parent.querySelectorAll('.js-stagger')];
         const idx = siblings.indexOf(en.target);
-        en.target.style.transitionDelay = `${idx * 0.14}s`;
+        en.target.style.transitionDelay = `${idx * 0.12}s`;
       }
       en.target.classList.add('visible');
       stgObs.unobserve(en.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
   const startObserving = () => {
     // Reveal main block elements
