@@ -24,12 +24,11 @@
 (function initMobileNav() {
   const burger   = document.getElementById('burger');
   const drawer   = document.getElementById('mobile-drawer') || document.getElementById('nav-menu');
-  const backdrop = document.getElementById('nav-backdrop');
+  const closeBtn = document.getElementById('mobile-close');
   if (!burger || !drawer) return;
 
   const open = () => {
     drawer.classList.add('open');
-    if (backdrop) backdrop.classList.add('active');
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Menü schließen');
     document.body.style.overflow = 'hidden';
@@ -37,14 +36,13 @@
 
   const close = () => {
     drawer.classList.remove('open');
-    if (backdrop) backdrop.classList.remove('active');
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Menü öffnen');
     document.body.style.overflow = '';
   };
 
   burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
-  if (backdrop) backdrop.addEventListener('click', close);
+  if (closeBtn) closeBtn.addEventListener('click', close);
 
   drawer.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', e => {
@@ -65,6 +63,7 @@
 
   document.addEventListener('keydown', e => e.key === 'Escape' && close());
 })();
+
 
 
 
