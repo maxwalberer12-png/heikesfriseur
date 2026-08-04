@@ -16,14 +16,16 @@
   <meta property="og:locale" content="de_DE" />
 
   <!-- Preload Critical Hero Image for LCP Optimization -->
-  <link rel="preload" href="img/salon_hero.png" as="image" type="image/png" fetchpriority="high" />
+  <link rel="preload" href="img/salon_hero.webp" as="image" type="image/webp" fetchpriority="high" />
 
-  <!-- Fonts: Google Fonts Fallback for Firefox MIME-type compatibility -->
+  <!-- Fonts: Non-render-blocking Google Fonts loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-    rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+  </noscript>
 
   <!-- Lokale Fonts (DSGVO-konform) -->
   <style>
@@ -236,8 +238,8 @@
         <div class="hero-editorial-media js-reveal">
           <div class="media-frame group">
             <picture>
-              <source media="(max-width: 800px)" srcset="img/salon_hero.png" sizes="(max-width: 800px) 100vw, 800px" />
-              <img src="img/salon_hero.png" srcset="img/salon_hero.png 800w" sizes="(max-width: 800px) 100vw, 800px" alt="Friseursalon Interieur Friseurstüberl Heike Fröhlich" width="800" height="900" loading="eager" fetchpriority="high" decoding="async" class="media-img" />
+              <source media="(max-width: 800px)" srcset="img/salon_hero.webp" sizes="(max-width: 800px) 100vw, 800px" />
+              <img src="img/salon_hero.webp" srcset="img/salon_hero.webp 800w" sizes="(max-width: 800px) 100vw, 800px" alt="Friseursalon Interieur Friseurstüberl Heike Fröhlich" width="800" height="900" loading="eager" fetchpriority="high" decoding="async" class="media-img" />
             </picture>
             <div class="media-overlay-badge">
               <span class="badge-num">Bärnau</span>
@@ -376,7 +378,7 @@
               <div class="team-cards-grid">
                 <article class="bespoke-team-card group js-reveal">
                   <div class="team-media-wrap">
-                    <img src="img/team_heike.png" srcset="img/team_heike.png 400w" sizes="(max-width: 800px) 100vw, 400px" alt="Heike Fröhlich – Inhaberin" width="400"
+                    <img src="img/team_heike.webp" srcset="img/team_heike.webp 400w" sizes="(max-width: 800px) 100vw, 400px" alt="Heike Fröhlich – Inhaberin" width="400"
                       height="500" loading="lazy" decoding="async" class="team-img" />
                   </div>
                   <div class="team-meta">
