@@ -889,38 +889,88 @@ body.js-enabled .team-media-wrap.visible .team-img {
 
 
 /* ═══════════════════════════════════════════════════════
-   RESPONSIVE NAV
+   MOBILE NAVIGATION DRAWER & BACKDROP (OUTSIDE HEADER)
 ═══════════════════════════════════════════════════════ */
-@media (max-width: 768px) {
-  .main-nav {
-    display: none;
-    position: fixed;
-    inset: 76px 0 0 auto;
-    width: min(300px, 85vw);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.12);
-    padding: 1.5rem;
-    overflow-y: auto;
-    z-index: 99;
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 26, 23, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.nav-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .burger {
+    display: flex;
+    z-index: 1001;
   }
-  .main-nav.open { display: flex; }
-  .main-nav .nav-link {
-    padding: 0.875rem 0;
+
+  .main-nav {
+    display: none !important;
+  }
+
+  .mobile-drawer {
+    display: flex;
+    position: fixed;
+    top: 76px;
+    right: 0;
+    width: min(320px, 85vw);
+    height: calc(100vh - 76px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #F5F2EE;
+    border-left: 1px solid var(--border);
+    box-shadow: -10px 0 30px rgba(31, 26, 23, 0.25);
+    padding: 2.25rem 1.75rem;
+    overflow-y: auto;
+    z-index: 999;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+  }
+
+  .mobile-drawer.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 1.15rem 0;
     border-bottom: 1px solid var(--border);
     width: 100%;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-head);
+    transition: color 0.2s;
   }
-  .main-nav .nav-cta {
-    margin-top: 1.25rem;
+  .mobile-nav-link:hover {
+    color: var(--accent);
+  }
+
+  .mobile-nav-cta {
+    margin-top: 2rem;
     width: 100%;
     text-align: center;
+    padding: 14px 22px;
+    font-size: 0.95rem;
   }
-  .burger { display: flex; }
 }
+
+
 
 /* ═══════════════════════════════════════════════════════
    PINNED HORIZONTAL SCROLL EXPERIENCE (CREAM-GREY & BROWN)

@@ -22,30 +22,51 @@
 
 /* ══ MOBILE NAV ════════════════════════════════════════ */
 (function initMobileNav() {
-  const burger = document.getElementById('burger');
-  const nav    = document.getElementById('main-nav') || document.getElementById('nav-menu');
-  if (!burger || !nav) return;
+  const burger   = document.getElementById('burger');
+  const drawer   = document.getElementById('mobile-drawer') || document.getElementById('nav-menu');
+  const backdrop = document.getElementById('nav-backdrop');
+  if (!burger || !drawer) return;
 
-  const open  = () => {
-    nav.classList.add('open');
+  const open = () => {
+    drawer.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Menü schließen');
     document.body.style.overflow = 'hidden';
   };
+
   const close = () => {
-    nav.classList.remove('open');
+    drawer.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Menü öffnen');
     document.body.style.overflow = '';
   };
 
-  burger.addEventListener('click', () => nav.classList.contains('open') ? close() : open());
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  document.addEventListener('keydown', e => e.key === 'Escape' && close());
-  document.addEventListener('click', e => {
-    if (nav.classList.contains('open') && !nav.contains(e.target) && !burger.contains(e.target)) close();
+  burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+  if (backdrop) backdrop.addEventListener('click', close);
+
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      close();
+      if (href && href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          setTimeout(() => {
+            const top = target.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }, 150);
+        }
+      }
+    });
   });
+
+  document.addEventListener('keydown', e => e.key === 'Escape' && close());
 })();
+
+
 
 /* ══ SMOOTH SCROLL ═════════════════════════════════════ */
 (function initSmoothScroll() {
