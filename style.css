@@ -785,20 +785,69 @@ input[aria-invalid="true"] { border-color: #ef4444; }
 .footer {
   background: #DFD9D2;
   border-top: 1px solid var(--border);
-  padding-block: 1.5rem;
+  padding-block: 2rem 1.75rem;
 }
-.footer-row {
+
+.footer-grid {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem 2rem;
 }
-.footer-brand { font-family: var(--font-serif); font-size: 0.875rem; color: var(--text-body); }
+
+.footer-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-head);
+}
+.footer-tagline {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.footer-address-text {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.825rem;
+  color: var(--text-body);
+}
+.footer-phone a {
+  color: var(--accent);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.footer-phone a:hover {
+  color: var(--accent-hover);
+}
+
+.footer-col-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
 .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
 .footer-links { display: flex; gap: 1.25rem; }
 .footer-links a { font-size: 0.78rem; color: var(--text-muted); transition: color 0.2s; }
 .footer-links a:hover { color: var(--text-head); }
+
+@media (max-width: 768px) {
+  .footer-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-col-meta {
+    align-items: flex-start;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    width: 100%;
+  }
+}
+
 
 /* ═══════════════════════════════════════════════════════
    EDITORIAL SLOW & LUXURIOUS SCROLL ANIMATIONS
