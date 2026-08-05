@@ -505,10 +505,6 @@ h2 em { font-style: italic; color: var(--accent); }
   font-weight: 600;
   color: var(--accent);
 }
-.service-note {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
 
 /* ═══════════════════════════════════════════════════════
    SECTION 3: TEAM
@@ -537,54 +533,48 @@ h2 em { font-style: italic; color: var(--accent); }
 
 .team-media-wrap {
   position: relative;
-  aspect-ratio: 16/10;
-  max-height: 250px;
+  aspect-ratio: 16/9;
+  max-height: 180px;
   overflow: hidden;
   background: var(--bg-subtle);
 }
-.team-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s var(--ease-out);
-}
-.bespoke-team-card:hover .team-img {
-  transform: scale(1.05);
-}
-
-.team-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(31, 26, 23, 0.85) 0%, rgba(31, 26, 23, 0.1) 60%, transparent 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 1rem;
-}
-.team-specialty {
-  font-size: 0.8rem;
-  color: #ffffff;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
 .team-media-wrap--placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #E4DFD8 0%, #DCD6CF 100%);
+  background: linear-gradient(135deg, #EBE5DC 0%, #DFD7CC 100%);
+  border-bottom: 1px solid var(--border);
 }
 .placeholder-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-muted);
+  color: var(--text-body);
+  text-align: center;
+  padding: 1rem;
 }
-.placeholder-mark { font-size: 2rem; color: var(--accent); opacity: 0.85; }
-.placeholder-title { font-family: var(--font-serif); font-size: 1rem; color: var(--text-head); }
+.placeholder-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.placeholder-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-head);
+  letter-spacing: -0.01em;
+}
 
 .team-meta {
-  padding: 1.15rem 1.25rem;
+  padding: 1.25rem 1.35rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

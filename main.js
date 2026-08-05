@@ -121,40 +121,16 @@
   }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
   const startObserving = () => {
-    const viewportHeight = window.innerHeight;
-
-    // Read-First Phase: gather all bounding rects
-    const revElements = [...document.querySelectorAll('.js-reveal, .media-frame, .team-media-wrap')].map(el => ({
-      el,
-      rect: el.getBoundingClientRect()
-    }));
-
-    const stgElements = [...document.querySelectorAll('.js-stagger')].map(el => ({
-      el,
-      rect: el.getBoundingClientRect()
-    }));
-
-    // Write Phase: observe and set initial visibility
-    revElements.forEach(({ el, rect }) => {
-      revObs.observe(el);
-      if (rect.top < viewportHeight - 30 && rect.bottom > 0) {
-        setTimeout(() => el.classList.add('visible'), 120);
-      }
-    });
-
-    stgElements.forEach(({ el, rect }) => {
-      stgObs.observe(el);
-      if (rect.top < viewportHeight - 30 && rect.bottom > 0) {
-        setTimeout(() => el.classList.add('visible'), 180);
-      }
-    });
+    // Pure IntersectionObserver observation — zero forced synchronous reflows at load
+    document.querySelectorAll('.js-reveal, .media-frame, .team-media-wrap').forEach(el => revObs.observe(el));
+    document.querySelectorAll('.js-stagger').forEach(el => stgObs.observe(el));
   };
 
   if (document.body.classList.contains('loader-finished')) {
     startObserving();
   } else {
     window.addEventListener('loaderFinished', startObserving, { once: true });
-    setTimeout(startObserving, 1500);
+    setTimeout(startObserving, 1200);
   }
 })();
 
@@ -199,8 +175,8 @@
   // Cached layout metrics to avoid Layout Thrashing on scroll
   let cachedViewportWidth = window.innerWidth;
   let cachedViewportHeight = window.innerHeight;
-  let cachedContainerHeight = container.offsetHeight;
-  let cachedContainerOffsetTop = container.offsetTop;
+  let cachedContainerHeight = 0;
+  let cachedContainerOffsetTop = 0;
   let cachedPanels = [...container.querySelectorAll('.horizontal-panel')];
 
   const updateMetrics = () => {
@@ -262,8 +238,18 @@
     requestScrollUpdate();
   }, { passive: true });
 
-  updateMetrics();
-  updateScrollState();
+  const initAsync = () => {
+    requestAnimationFrame(() => {
+      updateMetrics();
+      updateScrollState();
+    });
+  };
+
+  if (document.readyState === 'complete') {
+    initAsync();
+  } else {
+    window.addEventListener('load', initAsync, { once: true });
+  }
 
   // Navigation arrow buttons
   const scrollToPanel = (index) => {
