@@ -194,6 +194,7 @@
       return;
     }
 
+    // --- 1. STRIKTE READ-PHASE (Lese-Zugriffe) ---
     const rectTop = container.getBoundingClientRect().top;
     const headerHeight = 76;
     const scrollableDist = cachedContainerHeight - cachedViewportHeight;
@@ -205,21 +206,19 @@
     let progress = scrolled / scrollableDist;
     progress = Math.min(1, Math.max(0, progress));
 
-    // Move horizontal track
     const maxTranslate = (totalPanels - 1) * cachedViewportWidth;
     const translateX = progress * maxTranslate;
+    const barWidth = 25 + (progress * 75);
+    currentPanelIndex = Math.min(totalPanels - 1, Math.max(0, Math.round(progress * (totalPanels - 1))));
+    const currentPanel = cachedPanels[currentPanelIndex];
+
+    // --- 2. STRIKTE WRITE-PHASE (Schreib-Zugriffe) ---
     track.style.transform = `translateX(-${translateX}px)`;
 
-    // Update progress bar fill
-    const barWidth = 25 + (progress * 75);
     if (bar) bar.style.width = `${barWidth}%`;
 
-    // Update step indicator
-    currentPanelIndex = Math.min(totalPanels - 1, Math.max(0, Math.round(progress * (totalPanels - 1))));
     if (step) step.textContent = `0${currentPanelIndex + 1} / 0${totalPanels}`;
 
-    // Reveal elements inside active horizontal panel
-    const currentPanel = cachedPanels[currentPanelIndex];
     if (currentPanel) {
       currentPanel.querySelectorAll('.js-reveal, .js-stagger').forEach(el => el.classList.add('visible'));
     }
