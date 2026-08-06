@@ -84,8 +84,11 @@
   --accent-hover: #4E2E1F;
   --accent-soft:  rgba(102, 63, 44, 0.08);
 
-  --font-serif: 'Playfair Display', serif;
-  --font-sans:  'Inter', sans-serif;
+  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --r-card: 1.25rem;
   --r-full: 9999px;
