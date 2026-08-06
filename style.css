@@ -103,7 +103,7 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: var(--font-sans);
+  font-family: 'Inter', sans-serif !important;
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text-body);
@@ -349,7 +349,7 @@ h2 em { font-style: italic; color: var(--accent); }
   margin-bottom: 1rem;
 }
 .hero-editorial-title {
-  font-family: var(--font-serif);
+  font-family: 'Playfair Display', Georgia, serif !important;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
