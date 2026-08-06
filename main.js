@@ -289,3 +289,32 @@
   const el = document.getElementById('yr');
   if (el) el.textContent = new Date().getFullYear();
 })();
+
+/* ══ MOBILE FLOAT CALL BUTTON DOCKING (STOP BEFORE FOOTER) ════ */
+(function initMobileFloatCallDock() {
+  const floatBtn = document.querySelector('.mobile-float-call');
+  const footer   = document.querySelector('.footer');
+  if (!floatBtn || !footer) return;
+
+  const updatePosition = () => {
+    if (window.innerWidth >= 900) return;
+    const footerRect = footer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Calculate how much of the footer is visible in the viewport
+    const footerVisibleHeight = windowHeight - footerRect.top;
+    
+    if (footerVisibleHeight > 0) {
+      // Footer is in view: dock button 20px above top edge of footer
+      const newBottom = footerVisibleHeight + 20;
+      floatBtn.style.bottom = `${newBottom}px`;
+    } else {
+      // Normal fixed position
+      floatBtn.style.bottom = '';
+    }
+  };
+
+  window.addEventListener('scroll', updatePosition, { passive: true });
+  window.addEventListener('resize', updatePosition, { passive: true });
+  updatePosition();
+})();
