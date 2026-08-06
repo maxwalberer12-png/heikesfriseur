@@ -2,8 +2,6 @@
 <html lang="de" dir="ltr" class="scroll-smooth">
 
 <head>
-  <!-- Preload Critical Hero Image for LCP Optimization -->
-  <link rel="preload" href="img/salon_hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ECE7E2" />
@@ -225,8 +223,9 @@
          SECTION 1: HERO (ASYMMETRIC EDITORIAL)
     ══════════════════════════════════════ -->
     <section class="hero-editorial" id="hero" aria-labelledby="hero-h">
-      <div class="container hero-asymmetric-grid">
+      <div class="container">
         <div class="hero-editorial-text js-reveal">
+          <span class="section-tag hero-tag">Friseursalon in Bärnau</span>
           <h1 id="hero-h" class="hero-editorial-title">
             Schönheit im Einklang mit <em>deiner Persönlichkeit.</em>
           </h1>
@@ -234,21 +233,8 @@
             Willkommen im Friseurstüberl Heike Fröhlich in Bärnau. Entschleunigung, persönliche Typberatung &amp; leidenschaftliche Haarkunst in gemütlicher Atmosphäre.
           </p>
           <div class="hero-editorial-actions">
-            <a href="tel:+499635924158" class="btn-primary">Jetzt anrufen</a>
+            <a href="tel:+499635924158" class="btn-primary"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:6px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Jetzt anrufen</a>
             <a href="#leistungen" class="btn-ghost">Leistungen entdecken</a>
-          </div>
-        </div>
-
-        <div class="hero-editorial-media">
-          <div class="media-frame group">
-            <picture>
-              <source media="(max-width: 768px)" srcset="img/salon_hero_mobile.webp 400w" sizes="(max-width: 768px) 100vw, 800px" />
-              <img src="img/salon_hero.webp" srcset="img/salon_hero_mobile.webp 400w, img/salon_hero.webp 800w" sizes="(max-width: 768px) 100vw, 800px" alt="Friseursalon Interieur Friseurstüberl Heike Fröhlich" width="800" height="900" loading="eager" fetchpriority="high" decoding="async" class="media-img" />
-            </picture>
-            <div class="media-overlay-badge">
-              <span class="badge-num">Bärnau</span>
-              <span class="badge-lbl">Friseurstüberl Heike Fröhlich</span>
-            </div>
           </div>
         </div>
       </div>
@@ -376,13 +362,10 @@
 
               <div class="team-cards-grid">
                 <article class="bespoke-team-card group js-reveal">
-                  <div class="team-media-wrap team-media-wrap--placeholder">
-                    <div class="placeholder-content">
-                      <span class="placeholder-mark">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.47" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
-                      </span>
-                      <span class="placeholder-title">Friseurkunst &amp; Beratung</span>
-                    </div>
+                  <div class="team-media-wrap team-media-wrap--silhouette">
+                    <svg class="team-silhouette-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+                    </svg>
                   </div>
                   <div class="team-meta">
                     <span class="team-role">Inhaberin &amp; Friseurin</span>
@@ -392,13 +375,10 @@
                 </article>
 
                 <article class="bespoke-team-card group js-reveal">
-                  <div class="team-media-wrap team-media-wrap--placeholder">
-                    <div class="placeholder-content">
-                      <span class="placeholder-mark">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                      </span>
-                      <span class="placeholder-title">Wohlfühlatmosphäre &amp; Service</span>
-                    </div>
+                  <div class="team-media-wrap team-media-wrap--silhouette">
+                    <svg class="team-silhouette-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+                    </svg>
                   </div>
                   <div class="team-meta">
                     <span class="team-role">Friseurin</span>
