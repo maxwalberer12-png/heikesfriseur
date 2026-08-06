@@ -1,12 +1,6 @@
-/* ═══════════════════════════════════════════════════════
-   HIGH-END EDITORIAL WEB ARCHITECTURE (CREAM-WHITE-GREY & WARM BROWN)
-   Aesthetic: Editorial Boutique & Organic Warmth
-   Canvas: #ECE7E2 · Surface: #F5F2EE · Border: rgba(195, 185, 175, 0.6)
-   Headline: #1F1A17 (Playfair Display) · Body: #4A433E (Inter)
-   Accent: #6B4234 (Rich Warm Walnut Brown)
-   ═══════════════════════════════════════════════════════ */
+/* Base theme */
 
-/* ── LOKALE FONTS (@font-face) ────────────────────────── */
+/* Local fonts */
 @font-face {
   font-family: 'Playfair Display';
   src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
@@ -95,7 +89,7 @@
   --shadow-lg:0 22px 55px rgba(26, 20, 18, 0.1);
 }
 
-/* ── RESET & CROSS-BROWSER BASE ─────────────────────── */
+/* Reset & base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -144,9 +138,7 @@ img { display: block; max-width: 100%; height: auto; }
   padding-inline: clamp(1.25rem, 5vw, 3.5rem);
 }
 
-/* ═══════════════════════════════════════════════════════
-   HEADER (GLASSMORPHISM CREAM-GREY)
-═══════════════════════════════════════════════════════ */
+/* Header */
 .header {
   position: sticky;
   top: 0;
@@ -243,9 +235,7 @@ img { display: block; max-width: 100%; height: auto; }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ═══════════════════════════════════════════════════════
-   BUTTONS (RICH WARM BROWN)
-═══════════════════════════════════════════════════════ */
+/* Buttons */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -285,9 +275,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-/* ═══════════════════════════════════════════════════════
-   SECTIONS
-═══════════════════════════════════════════════════════ */
+/* Sections */
 .section { padding-block: clamp(4rem, 10vh, 7rem); }
 .section-bordered {
   border-top: 1px solid var(--border);
@@ -323,9 +311,7 @@ h2 em { font-style: italic; color: var(--accent); }
   margin-top: 0.75rem;
 }
 
-/* ═══════════════════════════════════════════════════════
-   SECTION 1: HERO
-═══════════════════════════════════════════════════════ */
+/* Hero section */
 .hero-editorial {
   min-height: calc(100vh - 76px);
   display: flex;
@@ -418,9 +404,7 @@ h2 em { font-style: italic; color: var(--accent); }
 }
 .badge-lbl { font-size: 0.75rem; color: var(--text-body); margin-top: 2px; }
 
-/* ═══════════════════════════════════════════════════════
-   SECTION 2: ÜBER UNS
-═══════════════════════════════════════════════════════ */
+/* About section */
 .editorial-split {
   display: grid;
   grid-template-columns: 1fr;
@@ -488,12 +472,8 @@ h2 em { font-style: italic; color: var(--accent); }
 }
 .stat-label { font-size: 0.8rem; color: var(--text-body); }
 
-/* ═══════════════════════════════════════════════════════
-   SECTION: LEISTUNGEN (STRUCTURED CLEAN GRID)
-═══════════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════════
-   SECTION: LEISTUNGEN (STRUCTURED CLEAN GRID)
-═══════════════════════════════════════════════════════ */
+/* Services grid */
+/* Services grid */
 .horizontal-panel .section-head {
   margin-bottom: 1.25rem;
 }
@@ -570,9 +550,7 @@ h2 em { font-style: italic; color: var(--accent); }
   color: var(--accent);
 }
 
-/* ═══════════════════════════════════════════════════════
-   SECTION 3: TEAM
-═══════════════════════════════════════════════════════ */
+/* Team section */
 .team-cards-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -648,9 +626,7 @@ h2 em { font-style: italic; color: var(--accent); }
 }
 
 
-/* ═══════════════════════════════════════════════════════
-   SECTION 5: TERMIN VEREINBAREN
-═══════════════════════════════════════════════════════ */
+/* Contact & booking */
 .boutique-contact-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -722,9 +698,7 @@ h2 em { font-style: italic; color: var(--accent); }
 
 .privacy-link { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-/* ═══════════════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════════════ */
+/* Footer */
 .footer {
   background: #EFE7DE;
   border-top: 1px solid var(--border);
@@ -792,9 +766,7 @@ h2 em { font-style: italic; color: var(--accent); }
 }
 
 
-/* ═══════════════════════════════════════════════════════
-   EDITORIAL SLOW & LUXURIOUS SCROLL ANIMATIONS
-═══════════════════════════════════════════════════════ */
+/* Scroll animations */
 .js-reveal, .js-stagger {
   opacity: 1;
   transform: none;
@@ -812,7 +784,7 @@ body.js-enabled .js-stagger:not(.visible) {
   transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Image Slow Zoom-In Reveal */
+/* Image reveal */
 body.js-enabled .media-frame .media-img,
 body.js-enabled .team-media-wrap .team-img {
   transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -831,9 +803,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
 }
 
 
-/* ═══════════════════════════════════════════════════════
-   FULL-SCREEN GLASSMORPHISM MOBILE OVERLAY MENU
-═══════════════════════════════════════════════════════ */
+/* Mobile drawer menu */
 .mobile-drawer {
   display: none;
 }
@@ -982,9 +952,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
 
 
 
-/* ═══════════════════════════════════════════════════════
-   PINNED HORIZONTAL SCROLL EXPERIENCE (CREAM-GREY & BROWN)
-═══════════════════════════════════════════════════════ */
+/* Horizontal scroll layout */
 .horizontal-pin-container {
   position: relative;
   height: 550vh;
@@ -1094,9 +1062,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
   font-weight: 600;
 }
 
-/* ═══════════════════════════════════════════════════════
-   SUBPAGES (DATENSCHUTZ & IMPRESSUM)
-═══════════════════════════════════════════════════════ */
+/* Legal subpages */
 .subpage-hero {
   padding-top: clamp(2.5rem, 6vh, 4.5rem);
   padding-bottom: clamp(2rem, 5vh, 3.5rem);
@@ -1190,9 +1156,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
   line-height: 1.8 !important;
 }
 
-/* ═══════════════════════════════════════════════════════
-   INITIAL LOADER (ANIMATED CLEAN SILVER SCISSORS)
-═══════════════════════════════════════════════════════ */
+/* Page loader */
 .loader {
   position: fixed;
   inset: 0;
@@ -1276,9 +1240,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
   100% { width: 100%; }
 }
 
-/* ═══════════════════════════════════════════════════════
-   RESPONSIVE OPTIMIZATIONS (TABLETS & SMARTPHONES)
-═══════════════════════════════════════════════════════ */
+/* Responsive layout */
 @media (max-width: 899px) {
   html, body {
     overflow-x: hidden !important;
@@ -1412,9 +1374,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
   }
 }
 
-/* ═══════════════════════════════════════════════════════
-   PRICING NOTICE BANNER & CALL ONLY LAYOUT
-   ═══════════════════════════════════════════════════════ */
+/* Pricing notice */
 .pricing-notice-banner {
   background: var(--surface);
   border: 1px solid var(--border-strong);
@@ -1445,7 +1405,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
   margin: 0;
 }
 
-/* Call-Only Layout in Section 4 */
+/* Call-only layout */
 .boutique-call-only-layout {
   width: 100%;
 }
@@ -1544,9 +1504,7 @@ body.js-enabled .team-media-wrap.visible .team-img {
 .address-p { font-size: 0.9rem; color: var(--text-body); line-height: 1.6; margin-bottom: 0.75rem; }
 .map-link { font-size: 0.825rem; font-weight: 600; color: var(--accent); text-decoration: underline; }
 
-/* ═══════════════════════════════════════════════════════
-   FLOATING MOBILE CALL BUTTON (BOTTOM LEFT)
-   ═══════════════════════════════════════════════════════ */
+/* Floating mobile call button */
 .mobile-float-call {
   display: none;
 }
