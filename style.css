@@ -933,6 +933,20 @@ body.js-enabled .team-media-wrap.visible .team-img {
     padding-left: 0.5rem;
   }
 
+  .mobile-nav-sublink {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding-block: 0.5rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .mobile-nav-sublink:hover,
+  .mobile-nav-sublink:focus {
+    color: var(--accent);
+    padding-left: 0.5rem;
+  }
+
   .mobile-nav-cta {
     margin-top: 1.75rem;
     width: 100%;
